@@ -42,7 +42,7 @@ describe('ResetPasswordService', () => {
 
     const updatedUser = await fakeUsersRepository.findById(user.id);
 
-    expect(generateHash).toHaveBeenCalledWith('123');
+    expect(generateHash).toBeCalledWith('123');
     expect(updatedUser?.password).toBe('123');
   });
 

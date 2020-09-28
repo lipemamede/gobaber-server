@@ -1,7 +1,7 @@
-// import AppError from '@shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
-import ListProvidersService from './ListProvidersService';
+import ListProvidersService from './ListProvidersServices';
 
 let fakeUsersRepository: FakeUsersRepository;
 let listProviders: ListProvidersService;
@@ -9,10 +9,11 @@ let listProviders: ListProvidersService;
 describe('ListProviders', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
+
     listProviders = new ListProvidersService(fakeUsersRepository);
   });
 
-  it('should be able to list the providers', async () => {
+  it('should be able to list providers', async () => {
     const user1 = await fakeUsersRepository.create({
       name: 'John Doe',
       email: 'johndoe@example.com',
@@ -20,15 +21,15 @@ describe('ListProviders', () => {
     });
 
     const user2 = await fakeUsersRepository.create({
-      name: 'John Trê',
+      name: 'John Tre',
       email: 'johntre@example.com',
-      password: '123456',
+      password: '654321',
     });
 
     const loggedUser = await fakeUsersRepository.create({
       name: 'John Qua',
       email: 'johnqua@example.com',
-      password: '123456',
+      password: '111222',
     });
 
     const providers = await listProviders.execute({
