@@ -8,7 +8,7 @@ import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;
-  avatarFilename: string;
+  avatarFileName: string;
 }
 
 @injectable()
@@ -21,7 +21,7 @@ class UpdateUserAvatarService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+  public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById(user_id);
 
     if (!user) {
@@ -32,7 +32,7 @@ class UpdateUserAvatarService {
       await this.storageProvider.deleteFile(user.avatar);
     }
 
-    const filename = await this.storageProvider.saveFile(avatarFilename);
+    const filename = await this.storageProvider.saveFile(avatarFileName);
 
     user.avatar = filename;
 
